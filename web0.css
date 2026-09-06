@@ -331,8 +331,8 @@ h3 {
     height: auto;
     transform-origin: bottom center;
     position: relative;
-    bottom: 165px; /* Đã nâng lên 50px (tăng/giảm tùy ý anh) */
-    z-index: 120;
+    bottom: 250px; /* Đã nâng lên 50px (tăng/giảm tùy ý anh) */
+    z-index: 100;
 }
 
 /* Thêm khoảng trống ở đáy page-wrapper để nội dung không bị 2 đầu hình che khuất */
