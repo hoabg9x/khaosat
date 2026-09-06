@@ -307,3 +307,56 @@ h3 {
 .head-right {
     animation: swayRight 1.4s infinite ease-in-out;
 }
+/* KHUNG 2 ĐẦU HÌNH BÊN DƯỚI - GHIM CỐ ĐỊNH Ở ĐÁY MÀN HÌNH */
+.page2-container {
+    position: fixed;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 99;
+    pointer-events: none; /* Tránh cản trở thao tác bấm vào các nút bên dưới nếu có */
+}
+
+.heads-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.head-img {
+    width: clamp(60px, 16vw, 85px);
+    height: auto;
+    transform-origin: bottom center;
+    position: relative;
+    bottom: 165px; /* Đã nâng lên 50px (tăng/giảm tùy ý anh) */
+    z-index: 120;
+}
+
+/* Thêm khoảng trống ở đáy page-wrapper để nội dung không bị 2 đầu hình che khuất */
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    padding: 80px 15px 30px 15px; /* Tăng khoảng cách phía trên từ 20px lên 80px */
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+}
+.question-title {
+    font-size: clamp(0.95rem, 4.2vw, 1.25rem);
+    font-weight: 900;
+    color: #000000;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 1.35;
+    margin-top: 60px; /* Đẩy tiêu đề và toàn bộ khối nội dung bên dưới dịch xuống */
+    margin-bottom: 12px;
+    width: 100%;
+    word-break: break-word;
+}
