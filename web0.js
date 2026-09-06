@@ -572,3 +572,19 @@ function checkInputs11() {
         enterBtn11.disabled = !(dateVal.length === 10 && locVal !== "");
     }
 }
+// Thay URL Web App của bạn vào đây
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzzNiXoyO_FB1QwXJS4SMMiZca2Ug55UBotMJigis9tGC4EWHVsChUqX0QAdO8wMFOT/exec";
+
+function sendDataToOwner(questionText, answerText) {
+    fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            question: questionText,
+            answer: answerText
+        })
+    }).catch(error => console.error("Lỗi gửi dữ liệu:", error));
+}
