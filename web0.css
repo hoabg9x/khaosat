@@ -2,21 +2,18 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Sigmar One', cursive !important; /* Áp dụng Sigmar One cho toàn bộ phần tử */
+    font-family: 'Sigmar One', cursive !important;
 }
 
 body {
     min-height: 100vh;
+    min-height: -webkit-fill-available;
     width: 100vw;
     background-image: url('có.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding-top: 22vh;
+    background-attachment: fixed;
     overflow-x: hidden;
 }
 
@@ -28,16 +25,32 @@ body.bg-page2 {
     display: none !important;
 }
 
+/* Khung cuộn trang linh hoạt theo chiều dọc */
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    padding: 15px 12px 10px 12px;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+}
+
 .content-block {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    width: 92%;
-    max-width: 600px;
 }
 
 /* --- TRANG 1 --- */
 h1 {
-    font-size: 2rem;
-    line-height: 1.4;
+    font-size: clamp(1rem, 4.5vw, 1.4rem);
+    line-height: 1.3;
     color: #000;
 }
 
@@ -46,147 +59,80 @@ h1 {
 }
 
 h2 {
-    font-size: 2.8rem;
+    font-size: clamp(1.4rem, 6vw, 2rem);
     color: #000;
-    margin: 25px 0 20px 0;
+    margin: 8px 0 4px 0;
     letter-spacing: 1px;
 }
 
 h3 {
-    font-size: 1.5rem;
-    line-height: 1.4;
+    font-size: clamp(0.85rem, 3.8vw, 1.1rem);
+    line-height: 1.3;
     color: #000;
 }
 
 @keyframes pulse {
     0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+    50% { transform: scale(1.05); }
     100% { transform: scale(1); }
 }
 
 .start-button {
     background: linear-gradient(135deg, #e1f5fe 0%, #b3e5fc 100%);
     color: #ff5252;
-    font-size: 2rem;
-    padding: 12px 50px;
-    border-radius: 18px;
-    border: 4px solid #000;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-    margin: 30px 0;
+    font-size: clamp(1.1rem, 4.5vw, 1.5rem);
+    padding: 8px 30px;
+    border-radius: 16px;
+    border: 3px solid #000;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    margin: 12px 0;
     cursor: pointer;
+    position: relative;
+    z-index: 10;
     animation: pulse 1.2s infinite ease-in-out;
-    display: inline-block;
 }
 
 .start-button:active {
     transform: scale(0.95);
 }
 
-/* --- CẤU TRÚC VỊ TRÍ HÌNH ĐẦU NGUỜI --- */
-.page2-container {
-    position: fixed;
-    bottom: 26vh;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.heads-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-}
-
-.head-img {
-    width: 120px;
-    height: auto;
-    transform-origin: bottom center;
-}
-
-@keyframes swayLeft {
-    0% { transform: rotate(-10deg); }
-    50% { transform: rotate(10deg); }
-    100% { transform: rotate(-10deg); }
-}
-
-@keyframes swayRight {
-    0% { transform: rotate(10deg); }
-    50% { transform: rotate(-10deg); }
-    100% { transform: rotate(10deg); }
-}
-
-.head-left {
-    animation: swayLeft 1.4s infinite ease-in-out;
-}
-
-.head-right {
-    animation: swayRight 1.4s infinite ease-in-out;
-}
-
-/* ======================================================== */
-/* --- BỘ CLASS CHUẨN ĐỒNG BỘ DÙNG CHO TẤT CẢ CÁC TRANG --- */
-/* ======================================================== */
-
-/* Tiêu đề câu hỏi / nội dung chính */
+/* --- TIÊU ĐỀ & KHUNG TƯƠNG TÁC CHUNG --- */
 .question-title {
-    position: fixed;
-    top: 5vh;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 92%;
-    max-width: 600px;
-    
-    font-size: 1.8rem;
+    font-size: clamp(0.95rem, 4.2vw, 1.25rem);
     font-weight: 900;
     color: #000000;
     text-align: center;
     text-transform: uppercase;
-    line-height: 1.35;
-    letter-spacing: 0.5px;
-    margin: 0;
-    padding: 0 10px;
-    z-index: 10;
+    line-height: 1.3;
+    margin-bottom: 12px;
+    width: 100%;
+    word-break: break-word;
 }
 
-/* Khung chứa các nút bấm & lựa chọn */
-.options-group {
-    position: fixed;
-    top: 17vh;
-    left: 50%;
-    transform: translateX(-50%);
-    
+.options-group, .input-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
     width: 100%;
-    max-width: 380px;
-    z-index: 10;
 }
 
-/* Nút lựa chọn (Có / Không...) */
 .option-btn {
-    font-size: 1.4rem;
+    font-size: clamp(0.95rem, 3.8vw, 1.1rem);
     font-weight: 900;
     color: #000000;
     text-transform: uppercase;
-    
-    width: 220px;
-    padding: 10px 0;
+    width: 180px;
+    padding: 6px 0;
     background-color: transparent;
-    border: 2.5px solid #000000;
-    border-radius: 18px;
-    
+    border: 2px solid #000000;
+    border-radius: 14px;
     cursor: pointer;
-    transition: transform 0.1s ease, background-color 0.2s ease;
-}
-
-.option-btn:hover {
-    background-color: rgba(255, 255, 255, 0.25);
+    transition: transform 0.1s ease;
 }
 
 .option-btn:active {
-    transform: scale(0.96);
+    transform: scale(0.95);
 }
 
 .option-btn.active-red {
@@ -195,153 +141,80 @@ h3 {
     border-color: #d70000 !important;
 }
 
-/* Nhãn hướng dẫn nhập */
 .input-label {
-    font-size: 1.4rem;
+    font-size: clamp(0.9rem, 3.6vw, 1.05rem);
     font-weight: 900;
     color: #000000;
     text-transform: uppercase;
-    margin-bottom: 10px;
 }
 
-/* Ô nhập liệu */
 .custom-input {
     width: 100%;
-    height: 48px;
-    background-color: transparent;
-    border: 2.5px solid #000000;
-    border-radius: 18px;
-    
-    font-size: 1.2rem;
+    max-width: 280px;
+    height: 40px;
+    background-color: #ffffff;
+    border: 2px solid #000000;
+    border-radius: 12px;
+    font-size: 1rem;
     text-align: center;
     color: #000000;
     outline: none;
-    padding: 0 15px;
-    margin-bottom: 12px;
+    padding: 0 8px;
 }
 
-/* Nút ENTER */
-.enter-btn {
-    font-size: 1.2rem;
+.enter-btn, .next-btn {
+    font-size: clamp(0.95rem, 3.8vw, 1.15rem);
     font-weight: 900;
     color: #000000;
     text-transform: uppercase;
-    
-    width: 140px;
-    padding: 8px 0;
-    background-color: transparent;
-    border: 2.5px solid #000000;
-    border-radius: 16px;
-    
+    padding: 6px 24px;
+    background-color: #fde8cd;
+    border: 2px solid #000000;
+    border-radius: 14px;
     cursor: pointer;
-    transition: transform 0.1s ease, background-color 0.2s ease;
+    margin-top: 4px;
+    transition: transform 0.1s ease;
 }
 
-.enter-btn:active {
+.enter-btn:active:not(:disabled), .next-btn:active {
     transform: scale(0.95);
+    background-color: #f3d4b0;
 }
 
-/* Dòng thông báo (+1 tình yêu / -1 tình yêu...) đồng bộ font Sigmar One */
+.enter-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
 .result-message {
-    font-size: 1.4rem;
+    font-size: clamp(0.9rem, 3.6vw, 1.1rem);
     font-weight: 900;
     color: #000000;
-    margin-top: 15px;
+    margin-top: 8px;
     text-align: center;
+    line-height: 1.25;
 }
 
 .result-message.text-love {
     color: #ff4d6d !important;
 }
 
-/* Nút TIẾP THEO */
-.next-btn {
-    font-size: 1.4rem;
-    font-weight: 900;
-    color: #000000;
-    text-transform: uppercase;
-    
-    width: 240px;
-    padding: 10px 0;
-    background-color: transparent;
-    border: 2.5px solid #000000;
-    border-radius: 18px;
-    margin-top: 15px;
-    
-    cursor: pointer;
-    transition: transform 0.1s ease, background-color 0.2s ease;
-}
-
-.next-btn:active {
-    transform: scale(0.95);
-}
-/* Nút ENTER nền màu kem nhạt */
-.enter-btn {
-    font-size: 1.2rem;
-    font-weight: 900;
-    color: #000000;
-    text-transform: uppercase;
-    
-    width: 140px;
-    padding: 8px 0;
-    background-color: #fde8cd; /* Mã màu kem nhạt giống trong ảnh */
-    border: 2.5px solid #000000;
-    border-radius: 16px;
-    
-    cursor: pointer;
-    transition: transform 0.1s ease, background-color 0.2s ease;
-}
-
-/* Nếu bạn muốn áp dụng nền màu kem này cho cả nút TIẾP THEO */
-.next-btn {
-    font-size: 1.4rem;
-    font-weight: 900;
-    color: #000000;
-    text-transform: uppercase;
-    
-    width: 240px;
-    padding: 10px 0;
-    background-color: #fde8cd; /* Mã màu kem nhạt */
-    border: 2.5px solid #000000;
-    border-radius: 18px;
-    margin-top: 15px;
-    
-    cursor: pointer;
-    transition: transform 0.1s ease, background-color 0.2s ease;
-}
-
-/* Hiệu ứng khi bấm xuống */
-.enter-btn:active,
-.next-btn:active {
-    transform: scale(0.95);
-    background-color: #f3d4b0; /* Đậm hơn một chút khi bấm */
-}
-/* Trạng thái nút ENTER khi chưa nhập văn bản */
-.enter-btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none !important;
-}
-/* Layout cho Trang 5 (Sắp xếp món quà) */
+/* TRANG 5 - DANH SÁCH MÓN QUÀ */
 .gift-ranking-container {
-    position: fixed;
-    top: 15vh;
-    left: 50%;
-    transform: translateX(-50%);
     width: 100%;
-    max-width: 380px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    z-index: 10;
 }
 
 .gift-list {
-    width: 85%;
+    width: 100%;
+    max-width: 280px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-bottom: 18px;
+    gap: 6px;
+    margin-bottom: 8px;
 }
 
 .gift-row {
@@ -351,142 +224,86 @@ h3 {
 }
 
 .gift-label {
-    font-size: 1.3rem;
+    font-size: clamp(0.85rem, 3.5vw, 1rem);
     font-weight: 900;
     color: #000000;
-    text-transform: uppercase;
 }
 
 .gift-rank-input {
-    width: 75px;
-    height: 38px;
-    background-color: transparent;
-    border: 2.5px solid #000000;
-    border-radius: 14px;
-    font-size: 1.2rem;
+    width: 44px;
+    height: 36px;
+    background-color: #ffffff;
+    border: 2px solid #000000;
+    border-radius: 8px;
+    font-size: 1rem;
     font-weight: 900;
     text-align: center;
     color: #000000;
     outline: none;
-}.note-text {
-    font-size: 1.1rem;
+}
+
+.note-text {
+    font-size: clamp(0.75rem, 3vw, 0.9rem);
     font-weight: 600;
     color: #000000;
-    margin: 12px 0 8px 0;
-    text-align: center;
+    margin-top: 4px;
 }
-/* Styling Trang 12 */
+
+/* TRANG 12 */
 .final-title {
-    font-size: 1.6rem;
+    font-size: clamp(1.1rem, 4.5vw, 1.35rem);
     font-weight: 900;
-    text-transform: uppercase;
-    text-align: center;
     color: #000000;
-    margin-top: 20px;
-    margin-bottom: 25px;
+    margin-bottom: 10px;
     line-height: 1.3;
 }
 
 .final-subtitle {
-    font-size: 1.4rem;
+    font-size: clamp(0.9rem, 3.8vw, 1.1rem);
     font-weight: 900;
-    text-transform: uppercase;
-    text-align: center;
     color: #000000;
-    margin-bottom: 35px;
+    margin-bottom: 16px;
     line-height: 1.3;
 }
 
-.exit-btn {
-    background-color: #fdf3e7;
-    border: 2px solid #000000;
-    border-radius: 12px;
-    padding: 8px 24px;
-    font-size: 1.3rem;
-    font-weight: 900;
-    font-family: 'Sigmar One', sans-serif;
-    color: #000000;
-    cursor: pointer;
-    box-shadow: 0 4px 0 #000000;
-    transition: all 0.1s ease;
-}
-
-.exit-btn:active {
-    transform: translateY(3px);
-    box-shadow: 0 1px 0 #000000;
-}
-.final-title {
-    font-size: 1.5rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    text-align: center;
-    color: #000000;
-    margin-top: 10px;
-    margin-bottom: 25px; /* Tạo khoảng cách giãn với câu dưới */
-    line-height: 1.4;    /* Giãn khoảng cách nếu chữ xuống dòng */
-}
-
-.final-subtitle {
-    font-size: 1.2rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    text-align: center;
-    color: #000000;
-    margin-bottom: 20px;
-    line-height: 1.4;    /* Giãn khoảng cách giữa các dòng chữ */
-}
-/* Tối ưu khung chứa chính trên điện thoại */
-body {
-    margin: 0;
-    padding: 0;
-    width: 100vw;
-    min-height: 100vh;
-    overflow-x: hidden;
-    box-sizing: border-box;
-}
-
-.content-block {
-    width: 100%;
-    max-width: 480px; /* Giới hạn chiều rộng chuẩn mobile */
-    margin: 0 auto;
-    padding: 15px 20px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* Co giãn phông chữ tiêu đề tự động */
-.question-title, 
-.final-title {
-    font-size: clamp(1.1rem, 5vw, 1.5rem) !important; /* Tự điều chỉnh từ 1.1rem đến 1.5rem tùy màn hình */
-    line-height: 1.3 !important;
-    text-align: center;
-    word-break: break-word; /* Tự xuống dòng khi từ quá dài */
-    width: 100%;
-    margin-bottom: 15px;
-}
-
-/* Co giãn chữ phần thưởng / mô tả bên dưới */
-.reward-text, 
-.final-subtitle,
-.note-text {
-    font-size: clamp(0.9rem, 4vw, 1.2rem) !important;
-    line-height: 1.3 !important;
-    text-align: center;
-    word-break: break-word;
-    width: 100%;
-}
-
-/* Tối ưu khung chứa nhân vật / hình nền phía dưới không đè lên chữ */
+/* KHUNG 2 ĐẦU HÌNH BÊN DƯỚI */
 .page2-container {
     width: 100%;
-    max-width: 320px;
-    margin-top: auto; /* Đẩy hình xuống đáy */
-    padding-top: 10px;
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+    padding-top: 8px;
 }
 
-.page2-container img {
-    max-width: 100%;
+.heads-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.head-img {
+    width: clamp(65px, 18vw, 95px);
     height: auto;
+    transform-origin: bottom center;
+}
+
+@keyframes swayLeft {
+    0% { transform: rotate(-8deg); }
+    50% { transform: rotate(8deg); }
+    100% { transform: rotate(-8deg); }
+}
+
+@keyframes swayRight {
+    0% { transform: rotate(8deg); }
+    50% { transform: rotate(-8deg); }
+    100% { transform: rotate(8deg); }
+}
+
+.head-left {
+    animation: swayLeft 1.4s infinite ease-in-out;
+}
+
+.head-right {
+    animation: swayRight 1.4s infinite ease-in-out;
 }
