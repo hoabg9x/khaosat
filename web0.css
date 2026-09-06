@@ -415,3 +415,23 @@ h3 {
     transform: translateY(3px);
     box-shadow: 0 1px 0 #000000;
 }
+.final-title {
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+    color: #000000;
+    margin-top: 10px;
+    margin-bottom: 25px; /* Tạo khoảng cách giãn với câu dưới */
+    line-height: 1.4;    /* Giãn khoảng cách nếu chữ xuống dòng */
+}
+
+.final-subtitle {
+    font-size: 1.2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+    color: #000000;
+    margin-bottom: 20px;
+    line-height: 1.4;    /* Giãn khoảng cách giữa các dòng chữ */
+}

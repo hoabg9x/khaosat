@@ -501,3 +501,74 @@ function submitPage11() {
     document.getElementById("page11").classList.add("hidden");
     document.getElementById("page12").classList.remove("hidden");
 }
+/* --- XỬ LÝ NÚT THOÁT Ở TRANG 12 --- */
+function handleExit() {
+    // Cố gắng đóng cửa sổ/tab
+    window.close();
+
+    // Dự phòng cho trình duyệt di động (Safari/Chrome) chặn đóng tab tự động
+    setTimeout(() => {
+        window.location.href = "about:blank";
+    }, 100);
+}
+/* --- CHỈ CHO PHÉP NHẬP SỐ VÀ KIỂM TRA ĐIỀU KIỆN KHÔNG TRÙNG NHAU (TRANG 5) --- */
+function validateGiftInput(input) {
+    // Lọc bỏ toàn bộ ký tự không phải là số (0-9)
+    input.value = input.value.replace(/[^0-9]/g, '');
+
+    // Kiểm tra điều kiện nhập
+    checkGiftInputs();
+}
+
+function checkGiftInputs() {
+    const inputs = document.querySelectorAll(".gift-rank-input");
+    const enterBtn5 = document.getElementById("enterBtn5");
+
+    // Lấy danh sách các giá trị đã nhập (loại bỏ ô trống)
+    const values = Array.from(inputs)
+                        .map(i => i.value.trim())
+                        .filter(v => v !== "");
+
+    // 1. Kiểm tra đã điền đủ 5 ô chưa
+    const allFilled = values.length === inputs.length;
+
+    // 2. Kiểm tra các số có bị trùng nhau không bằng Set
+    const hasNoDuplicates = new Set(values).size === values.length;
+
+    // Chỉ bật nút ENTER khi ĐIỀN ĐỦ 5 Ô và KHÔNG CÓ SỐ NÀO TRÙNG NHAU
+    if (enterBtn5) {
+        enterBtn5.disabled = !(allFilled && hasNoDuplicates);
+    }
+}
+/* --- TỰ ĐỘNG THÊM DẤU / KHI NHẬP NGÀY THÁNG NĂM (DD/MM/YYYY) --- */
+function formatAndCheckDate11(input) {
+    // Chỉ lấy chữ số 0-9
+    let v = input.value.replace(/\D/g, '');
+
+    // Giới hạn tối đa 8 chữ số (DDMMYYYY)
+    if (v.length > 8) v = v.slice(0, 8);
+
+    // Tự động chèn dấu / sau ngày (2 số) và tháng (4 số)
+    if (v.length >= 5) {
+        input.value = `${v.slice(0, 2)}/${v.slice(2, 4)}/${v.slice(4)}`;
+    } else if (v.length >= 3) {
+        input.value = `${v.slice(0, 2)}/${v.slice(2)}`;
+    } else {
+        input.value = v;
+    }
+
+    // Kiểm tra điều kiện mở nút ENTER
+    checkInputs11();
+}
+
+/* --- KIỂM TRA ĐIỀU KIỆN MỞ NÚT ENTER TẠI TRANG 11 --- */
+function checkInputs11() {
+    const dateVal = document.getElementById("dateInput11").value.trim();
+    const locVal = document.getElementById("locationInput11").value.trim();
+    const enterBtn11 = document.getElementById("enterBtn11");
+
+    // Mở khóa khi nhập đủ định dạng 10 ký tự (DD/MM/YYYY) và ô nơi nhận không trống
+    if (enterBtn11) {
+        enterBtn11.disabled = !(dateVal.length === 10 && locVal !== "");
+    }
+}

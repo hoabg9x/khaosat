@@ -116,52 +116,49 @@
             </div>
         </div>
     </div>
-    <!-- Trang 5: Sắp xếp thứ tự món quà -->
-    <div id="page5" class="content-block hidden">
-        <div class="question-title">
-            HÃY SẮP XẾP THỨ TỰ CÁC MÓN QUÀ EM THÍCH ĐƯỢC TẶNG !
+    <!-- Trang 5: Sắp xếp thứ tự các món quà -->
+<div id="page5" class="content-block hidden">
+    <div class="question-title">
+        HÃY SẮP XẾP THỨ TỰ CÁC MÓN QUÀ EM THÍCH ĐƯỢC TẶNG !
+    </div>
 
+    <div class="gift-ranking-container">
+        <div class="gift-list">
+            <div class="gift-row">
+                <span class="gift-label">HOA</span>
+                <input type="tel" maxlength="1" inputmode="numeric" class="gift-rank-input" oninput="validateGiftInput(this)">
+            </div>
+            <div class="gift-row">
+                <span class="gift-label">TIỀN</span>
+                <input type="tel" maxlength="1" inputmode="numeric" class="gift-rank-input" oninput="validateGiftInput(this)">
+            </div>
+            <div class="gift-row">
+                <span class="gift-label">GẤU BÔNG</span>
+                <input type="tel" maxlength="1" inputmode="numeric" class="gift-rank-input" oninput="validateGiftInput(this)">
+            </div>
+            <div class="gift-row">
+                <span class="gift-label">TRANG SỨC</span>
+                <input type="tel" maxlength="1" inputmode="numeric" class="gift-rank-input" oninput="validateGiftInput(this)">
+            </div>
+            <div class="gift-row">
+                <span class="gift-label">MỘT NỤ HÔN</span>
+                <input type="tel" maxlength="1" inputmode="numeric" class="gift-rank-input" oninput="validateGiftInput(this)">
+            </div>
         </div>
 
-        <div class="gift-ranking-container">
-            <div class="gift-list">
-                <div class="gift-row">
-                    <span class="gift-label">HOA</span>
-                    <input type="text" maxlength="1" class="gift-rank-input" oninput="checkGiftInputs()">
-                </div>
-                <div class="gift-row">
-                    <span class="gift-label">TIỀN</span>
-                    <input type="text" maxlength="1" class="gift-rank-input" oninput="checkGiftInputs()">
-                </div>
-                <div class="gift-row">
-                    <span class="gift-label">GẤU BÔNG</span>
-                    <input type="text" maxlength="1" class="gift-rank-input" oninput="checkGiftInputs()">
-                </div>
-                <div class="gift-row">
-                    <span class="gift-label">TRANG SỨC</span>
-                    <input type="text" maxlength="1" class="gift-rank-input" oninput="checkGiftInputs()">
-                </div>
-                <div class="gift-row">
-                    <span class="gift-label">MỘT NỤ HÔN</span>
-                    <input type="text" maxlength="1" class="gift-rank-input" oninput="checkGiftInputs()">
-                </div>
-            </div>
+        <button id="enterBtn5" class="enter-btn" onclick="submitGiftRankAnswer()" disabled>ENTER</button>
 
-            <button id="enterBtn5" class="enter-btn" onclick="submitGiftRankAnswer()" disabled>ENTER</button>
+        <div id="resultMessage5" class="result-message hidden"></div>
+        <button id="nextBtn5" class="next-btn hidden" onclick="goToPage6()">TIẾP THEO</button>
+    </div>
 
-            <!-- Khung thông báo & Nút TIẾP THEO của Trang 5 -->
-            <div id="resultMessage5" class="result-message hidden"></div>
-            <button id="nextBtn5" class="next-btn hidden" onclick="goToPage6()">TIẾP THEO</button>
-        </div>
-
-        <!-- Khung chứa 2 đầu người giữ nguyên -->
-        <div class="page2-container">
-            <div class="heads-wrapper">
-                <img src="dau1.png" class="head-img head-left" alt="Đầu 1">
-                <img src="dau2.png" class="head-img head-right" alt="Đầu 2">
-            </div>
+    <div class="page2-container">
+        <div class="heads-wrapper">
+            <img src="dau1.png" class="head-img head-left" alt="Đầu 1">
+            <img src="dau2.png" class="head-img head-right" alt="Đầu 2">
         </div>
     </div>
+</div>
     <div id="page6" class="content-block hidden">
         <div class="question-title">
             NẾU LỠ MỘT NGÀY ANH LÀM EM GIẬN THÌ EM MUỐN ANH LÀM GÌ ĐỂ DỖ EM?
@@ -309,6 +306,26 @@
             </div>
         </div>
     </div>
+   <!-- Trang 12: Trang kết thúc -->
+<div id="page12" class="content-block hidden">
+    <div class="final-title">
+        CẢM ƠN EM ĐÃ ĐẾN BÊN ANH
+    </div>
+
+    <div class="final-subtitle">
+        CHÚC EM CÓ NHỮNG NGÀY BÊN ANH THẬT HẠNH PHÚC!!!
+    </div>
+
+    <button id="exitBtn" class="enter-btn" style="margin-top: 30px;" onclick="handleExit()">THOÁT</button>
+
+    <!-- Khung chứa hình ảnh 2 đầu người & thỏ -->
+    <div class="page2-container">
+        <div class="heads-wrapper">
+            <img src="dau1.png" class="head-img head-left" alt="Đầu 1">
+            <img src="dau2.png" class="head-img head-right" alt="Đầu 2">
+        </div>
+    </div>
+</div>
     <script src="web0.js"></script>
 </body>
 </html>
