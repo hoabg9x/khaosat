@@ -281,6 +281,7 @@ function goToPage11() {
 }
 
 /* TRANG 11 */
+/* TRANG 11 */
 function formatAndCheckDate11(input) {
     let v = input.value.replace(/\D/g, '');
     if (v.length > 8) v = v.slice(0, 8);
@@ -299,19 +300,10 @@ function checkInputs11() {
 function submitPage11() {
     const dateVal = document.getElementById("dateInput11").value.trim();
     const locVal = document.getElementById("locationInput11").value.trim();
-    if (dateVal === "" || locVal === "") return;
-
-    sendDataToOwner("Trang 11", "Thông tin nhận quà", "Ngày: " + dateVal + " | Địa điểm: " + locVal);
-    document.getElementById("page11").classList.add("hidden");
-    document.getElementById("page12").classList.remove("hidden");
-}
-
-/* --- CHUYỂN TỪ TRANG 11 SANG TRANG 12 --- */
-function submitPage11() {
-    const dateVal = document.getElementById("dateInput11").value.trim();
-    const locVal = document.getElementById("locationInput11").value.trim();
-
     if (dateVal.length !== 10 || locVal === "") return;
+
+    // Gửi dữ liệu về Google Sheet
+    sendDataToOwner("Trang 11", "Thông tin nhận quà", "Ngày: " + dateVal + " | Địa điểm: " + locVal);
 
     // Chuyển sang Trang 12
     document.getElementById("page11").classList.add("hidden");
@@ -320,6 +312,5 @@ function submitPage11() {
 
 /* --- XỬ LÝ NÚT THOÁT Ở TRANG 12 --- */
 function handleExit() {
-    // Tải lại trang để reset toàn bộ về Trang 1
     window.location.reload();
 }
