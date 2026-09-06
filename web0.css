@@ -435,3 +435,58 @@ h3 {
     margin-bottom: 20px;
     line-height: 1.4;    /* Giãn khoảng cách giữa các dòng chữ */
 }
+/* Tối ưu khung chứa chính trên điện thoại */
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    min-height: 100vh;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+.content-block {
+    width: 100%;
+    max-width: 480px; /* Giới hạn chiều rộng chuẩn mobile */
+    margin: 0 auto;
+    padding: 15px 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Co giãn phông chữ tiêu đề tự động */
+.question-title, 
+.final-title {
+    font-size: clamp(1.1rem, 5vw, 1.5rem) !important; /* Tự điều chỉnh từ 1.1rem đến 1.5rem tùy màn hình */
+    line-height: 1.3 !important;
+    text-align: center;
+    word-break: break-word; /* Tự xuống dòng khi từ quá dài */
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* Co giãn chữ phần thưởng / mô tả bên dưới */
+.reward-text, 
+.final-subtitle,
+.note-text {
+    font-size: clamp(0.9rem, 4vw, 1.2rem) !important;
+    line-height: 1.3 !important;
+    text-align: center;
+    word-break: break-word;
+    width: 100%;
+}
+
+/* Tối ưu khung chứa nhân vật / hình nền phía dưới không đè lên chữ */
+.page2-container {
+    width: 100%;
+    max-width: 320px;
+    margin-top: auto; /* Đẩy hình xuống đáy */
+    padding-top: 10px;
+}
+
+.page2-container img {
+    max-width: 100%;
+    height: auto;
+}
