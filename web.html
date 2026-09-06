@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Màn hình Khảo sát</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="web0.css">
+</head>
+<body>
+
+    <!-- Trang 1 -->
+    <div id="page1" class="content-block">
+        <h1>
+            LÀM PHIỀN CHỊ <span class="highlight">HƯƠNG</span><br>
+            HOÀN THÀNH PHIẾU KHẢO SÁT
+        </h1>
+        
+        <button id="startButton" class="start-button">BẮT ĐẦU</button>
+        
+        <h2>PHẦN THƯỞNG</h2>
+
+        <h3>
+            MỘT CHÚ GẤU BÔNG SIÊU CẤP<br>
+            ĐÁNG YÊU ĐẾN TỪ ĐẠI CA <span class="highlight">HÒA</span>
+        </h3>
+    </div>
+
+    <!-- Trang 2 -->
+    <div id="page2" class="content-block hidden">
+        <div class="question-title">
+            Em có biết tên đầy đủ của tôi là gì không?
+        </div>
+
+        <div class="options-group">
+            <button class="option-btn" id="yesBtn" onclick="handleYesClick()">Có</button>
+            <button class="option-btn" id="noBtn" onclick="handleNoClick()">Không</button>
+
+            <!-- Khung nhập dữ liệu -->
+            <div id="inputContainer" class="input-container hidden">
+                <div class="input-label">MỜI NHẬP 💩 :</div>
+                <input type="text" id="nameInput" class="custom-input" placeholder="" autocomplete="off">
+                <button id="enterBtn" class="enter-btn" onclick="submitAnswer()">ENTER</button>
+            </div>
+
+            <!-- Dòng thông báo kết quả -->
+            <div id="resultMessage" class="result-message hidden"></div>
+
+            <!-- Nút TIẾP THEO hiện ra sau khi tương tác -->
+            <button id="nextBtn" class="next-btn hidden" onclick="goToNextPage()">TIẾP THEO</button>
+        </div>
+
+        <!-- Khung chứa 2 đầu người -->
+        <div class="page2-container">
+            <div class="heads-wrapper">
+                <img src="dau1.png" class="head-img head-left" alt="Đầu 1">
+                <img src="dau2.png" class="head-img head-right" alt="Đầu 2">
+            </div>
+        </div>
+    </div>
+
+    <!-- Trang 3 (Chuyển đến khi bấm TIẾP THEO) -->
+    <div id="page3" class="content-block hidden">
+        <div class="question-title">
+            TRANG TIẾP THEO
+        </div>
+    </div>
+
+    <script src="web0.js"></script>
+</body>
+</html>
