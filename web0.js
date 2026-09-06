@@ -131,7 +131,8 @@ function goToPage5() {
 
 /* TRANG 5 */
 function validateGiftInput(input) {
-    input.value = input.value.replace(/[^0-9]/g, '');
+    // Chỉ giữ lại chữ số và giới hạn từ 1 đến 5
+    input.value = input.value.replace(/[^1-5]/g, '');
     checkGiftInputs();
 }
 

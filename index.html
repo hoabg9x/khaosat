@@ -84,28 +84,27 @@
     </div>
 
     <!-- Trang 5 -->
-    <div id="page5" class="content-block hidden">
-        <div class="question-title">HÃY SẮP XẾP THỨ TỰ CÁC MÓN QUÀ EM THÍCH ĐƯỢC TẶNG !</div>
-        <div class="gift-ranking-container">
-            <div class="gift-list">
-                <div class="gift-row"><span class="gift-label">HOA</span><input type="text" data-label="Hoa" maxlength="1" class="gift-rank-input" oninput="validateGiftInput(this)"></div>
-                <div class="gift-row"><span class="gift-label">TIỀN</span><input type="text" data-label="Tiền" maxlength="1" class="gift-rank-input" oninput="validateGiftInput(this)"></div>
-                <div class="gift-row"><span class="gift-label">GẤU BÔNG</span><input type="text" data-label="Gấu bông" maxlength="1" class="gift-rank-input" oninput="validateGiftInput(this)"></div>
-                <div class="gift-row"><span class="gift-label">TRANG SỨC</span><input type="text" data-label="Trang sức" maxlength="1" class="gift-rank-input" oninput="validateGiftInput(this)"></div>
-                <div class="gift-row"><span class="gift-label">MỘT NỤ HÔN</span><input type="text" data-label="Một nụ hôn" maxlength="1" class="gift-rank-input" oninput="validateGiftInput(this)"></div>
-            </div>
-            <button id="enterBtn5" class="enter-btn" onclick="submitGiftRankAnswer()" disabled>ENTER</button>
-            <div id="resultMessage5" class="result-message hidden"></div>
-            <button id="nextBtn5" class="next-btn hidden" onclick="goToPage6()">TIẾP THEO</button>
+<div id="page5" class="content-block hidden">
+    <div class="question-title">HÃY SẮP XẾP THỨ TỰ CÁC MÓN QUÀ EM THÍCH ĐƯỢC TẶNG !</div>
+    <div class="gift-ranking-container">
+        <div class="gift-list">
+            <div class="gift-row"><span class="gift-label">HOA</span><input type="text" inputmode="numeric" pattern="[0-9]*" data-label="Hoa" maxlength="1" class="gift-rank-input" oninput="validateGiftInput(this)"></div>
+            <div class="gift-row"><span class="gift-label">TIỀN</span><input type="text" inputmode="numeric" pattern="[0-9]*" data-label="Tiền" maxlength="1" class="gift-rank-input" oninput="validateGiftInput(this)"></div>
+            <div class="gift-row"><span class="gift-label">GẤU BÔNG</span><input type="text" inputmode="numeric" pattern="[0-9]*" data-label="Gấu bông" maxlength="1" class="gift-rank-input" oninput="validateGiftInput(this)"></div>
+            <div class="gift-row"><span class="gift-label">TRANG SỨC</span><input type="text" inputmode="numeric" pattern="[0-9]*" data-label="Trang sức" maxlength="1" class="gift-rank-input" oninput="validateGiftInput(this)"></div>
+            <div class="gift-row"><span class="gift-label">MỘT NỤ HÔN</span><input type="text" inputmode="numeric" pattern="[0-9]*" data-label="Một nụ hôn" maxlength="1" class="gift-rank-input" oninput="validateGiftInput(this)"></div>
         </div>
-        <div class="page2-container">
-            <div class="heads-wrapper">
-                <img src="dau1.png" class="head-img head-left" alt="Đầu 1">
-                <img src="dau2.png" class="head-img head-right" alt="Đầu 2">
-            </div>
+        <button id="enterBtn5" class="enter-btn" onclick="submitGiftRankAnswer()" disabled>ENTER</button>
+        <div id="resultMessage5" class="result-message hidden"></div>
+        <button id="nextBtn5" class="next-btn hidden" onclick="goToPage6()">TIẾP THEO</button>
+    </div>
+    <div class="page2-container">
+        <div class="heads-wrapper">
+            <img src="dau1.png" class="head-img head-left" alt="Đầu 1">
+            <img src="dau2.png" class="head-img head-right" alt="Đầu 2">
         </div>
     </div>
-
+</div>
     <!-- Trang 6 -->
     <div id="page6" class="content-block hidden">
         <div class="question-title">NẾU LỠ MỘT NGÀY ANH LÀM EM GIẬN THÌ EM MUỐN ANH LÀM GÌ ĐỂ DỖ EM?</div>
