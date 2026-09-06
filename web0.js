@@ -305,9 +305,20 @@ function submitPage11() {
     document.getElementById("page12").classList.remove("hidden");
 }
 
-/* TRANG 12 */
+/* --- CHUYỂN TỪ TRANG 11 SANG TRANG 12 --- */
+function submitPage11() {
+    const dateVal = document.getElementById("dateInput11").value.trim();
+    const locVal = document.getElementById("locationInput11").value.trim();
+
+    if (dateVal.length !== 10 || locVal === "") return;
+
+    // Chuyển sang Trang 12
+    document.getElementById("page11").classList.add("hidden");
+    document.getElementById("page12").classList.remove("hidden");
+}
+
+/* --- XỬ LÝ NÚT THOÁT Ở TRANG 12 --- */
 function handleExit() {
-    sendDataToOwner("Trang 12", "Trạng thái", "Đã hoàn thành khảo sát");
-    window.close();
-    setTimeout(() => { window.location.href = "about:blank"; }, 100);
+    // Tải lại trang để reset toàn bộ về Trang 1
+    window.location.reload();
 }
