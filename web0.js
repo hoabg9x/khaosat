@@ -572,19 +572,200 @@ function checkInputs11() {
         enterBtn11.disabled = !(dateVal.length === 10 && locVal !== "");
     }
 }
-// Thay URL Web App của bạn vào đây
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzzNiXoyO_FB1QwXJS4SMMiZca2Ug55UBotMJigis9tGC4EWHVsChUqX0QAdO8wMFOT/exec";
+// =========================================================
+// CẤU HÌNH GỬI DỮ LIỆU
+// =========================================================
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzI9CBkl6d9yScw81wM5tiT6e7XZo3Dvd1tASn1AyIrgk6ToCVenfN3_Qzio27eAe2Z/exec";
 
-function sendDataToOwner(questionText, answerText) {
+function sendDataToOwner(pageName, questionText, answerText) {
+    if (!answerText || answerText.trim() === "") return;
+    
+    var formData = new URLSearchParams();
+    formData.append("page", pageName);
+    formData.append("question", questionText);
+    formData.append("answer", answerText);
+
     fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/x-www-form-urlencoded"
         },
-        body: JSON.stringify({
-            question: questionText,
-            answer: answerText
-        })
+        body: formData.toString()
     }).catch(error => console.error("Lỗi gửi dữ liệu:", error));
 }
+
+// =========================================================
+// TRANG 2: Bấm nút Chọn Có / Không
+// =========================================================
+function handlePage2Choice(choice) {
+    sendDataToOwner("Trang 2", "Xác nhận biết tên", choice);
+    if (typeof showNextPage === "function") showNextPage();
+}
+
+// =========================================================
+// TRANG 3: Món ăn yêu thích (Enter / Nút bấm)
+// =========================================================
+function submitPage3() {
+    var val = document.getElementById("foodInput")?.value || "";
+    if (val.trim() !== "") {
+        sendDataToOwner("Trang 3", "Món ăn yêu thích", val);
+        if (typeof showNextPage === "function") showNextPage();
+    }
+}
+
+// =========================================================
+// TRANG 4: Đồ uống yêu thích (Enter / Nút bấm)
+// =========================================================
+function submitPage4() {
+    var val = document.getElementById("drinkInput")?.value || "";
+    if (val.trim() !== "") {
+        sendDataToOwner("Trang 4", "Đồ uống yêu thích", val);
+        if (typeof showNextPage === "function") showNextPage();
+    }
+}
+
+// =========================================================
+// TRANG 5: Xếp hạng danh sách quà (Từ trên xuống dưới)
+// =========================================================
+function submitPage5() {
+    var inputs = document.querySelectorAll("#page5 .gift-rank-input, .page-5 .gift-rank-input, input[name='giftRank']");
+    var rankResults = [];
+
+    inputs.forEach(function(input, index) {
+        var label = input.getAttribute("data-label") || ("Mục " + (index + 1));
+        var val = input.value || "Trống";
+        rankResults.push(label + ": Hạng " + val);
+    });
+
+    var finalResult = rankResults.length > 0 ? rankResults.join(" | ") : "Không có dữ liệu";
+    sendDataToOwner("Trang 5", "Thứ tự xếp hạng quà", finalResult);
+    if (typeof showNextPage === "function") showNextPage();
+}
+
+// =========================================================
+// TRANG 6: Nhập chữ trả lời (Enter / Nút bấm)
+// =========================================================
+function submitPage6() {
+    var val = document.getElementById("page6Input")?.value || "";
+    if (val.trim() !== "") {
+        sendDataToOwner("Trang 6", "Câu trả lời Trang 6", val);
+        if (typeof showNextPage === "function") showNextPage();
+    }
+}
+
+// =========================================================
+// TRANG 7: Chọn Anh / Anh Hòa
+// =========================================================
+function selectPage7Option(choice) {
+    sendDataToOwner("Trang 7", "Lựa chọn xưng hô", choice);
+    if (typeof showNextPage === "function") showNextPage();
+}
+
+// =========================================================
+// TRANG 8: Chọn Trai / Gái
+// =========================================================
+function selectPage8Option(gender) {
+    sendDataToOwner("Trang 8", "Lựa chọn giới tính/đối tượng", gender);
+    if (typeof showNextPage === "function") showNextPage();
+}
+
+// =========================================================
+// TRANG 9: Đã chọn (Xác nhận lựa chọn)
+// =========================================================
+function submitPage9(selectedOptionName) {
+    var resultText = selectedOptionName || "Đã chọn";
+    sendDataToOwner("Trang 9", "Lựa chọn Trang 9", resultText);
+    if (typeof showNextPage === "function") showNextPage();
+}
+
+// =========================================================
+// TRANG 10: Nhập chữ trả lời (Enter / Nút bấm)
+// =========================================================
+function submitPage10() {
+    var val = document.getElementById("page10Input")?.value || "";
+    if (val.trim() !== "") {
+        sendDataToOwner("Trang 10", "Nội dung Trang 10", val);
+        if (typeof showNextPage === "function") showNextPage();
+    }
+}
+
+// =========================================================
+// TRANG 11: Nhập chữ 2 ô (Ngày & Địa điểm nhận quà)
+// =========================================================
+function submitPage11() {
+    var val1 = document.getElementById("page11Input1")?.value || "";
+    var val2 = document.getElementById("page11Input2")?.value || "";
+
+    if (val1.trim() !== "" || val2.trim() !== "") {
+        var combinedAnswer = "Ô 1 (Ngày): " + val1 + " | Ô 2 (Địa điểm): " + val2;
+        sendDataToOwner("Trang 11", "Thông tin nhận quà 2 ô", combinedAnswer);
+        if (typeof showNextPage === "function") showNextPage();
+    }
+}
+
+// =========================================================
+// TRANG 12: Hoàn tất khảo sát / Lời cảm ơn
+// =========================================================
+function submitPage12(finalMessage) {
+    var msg = finalMessage || "Đã hoàn thành toàn bộ bài khảo sát!";
+    sendDataToOwner("Trang 12", "Trạng thái cuối", msg);
+    if (typeof showFinalScreen === "function") {
+        showFinalScreen();
+    } else if (typeof showNextPage === "function") {
+        showNextPage();
+    }
+}
+
+// =========================================================
+// TỰ ĐỘNG BẮT SỰ KIỆN PHÍM ENTER CHO CÁC TRANG
+// =========================================================
+document.addEventListener("DOMContentLoaded", function() {
+    // Trang 3: ENTER
+    document.getElementById("foodInput")?.addEventListener("keypress", function(e) {
+        if (e.key === "Enter") { e.preventDefault(); submitPage3(); }
+    });
+
+    // Trang 4: ENTER
+    document.getElementById("drinkInput")?.addEventListener("keypress", function(e) {
+        if (e.key === "Enter") { e.preventDefault(); submitPage4(); }
+    });
+
+    // Trang 5: ENTER chuyển ô -> Ô cuối ENTER submit
+    var p5Inputs = document.querySelectorAll("#page5 .gift-rank-input, .page-5 .gift-rank-input");
+    p5Inputs.forEach(function(input, idx, array) {
+        input.addEventListener("keypress", function(e) {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                if (idx === array.length - 1) submitPage5();
+                else array[idx + 1].focus();
+            }
+        });
+    });
+
+    // Trang 6: ENTER
+    document.getElementById("page6Input")?.addEventListener("keypress", function(e) {
+        if (e.key === "Enter") { e.preventDefault(); submitPage6(); }
+    });
+
+    // Trang 10: ENTER
+    document.getElementById("page10Input")?.addEventListener("keypress", function(e) {
+        if (e.key === "Enter") { e.preventDefault(); submitPage10(); }
+    });
+
+    // Trang 11: ENTER chuyển ô 1 -> ô 2 -> submit
+    var p11Inp1 = document.getElementById("page11Input1");
+    var p11Inp2 = document.getElementById("page11Input2");
+
+    p11Inp1?.addEventListener("keypress", function(e) {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            if (p11Inp2) p11Inp2.focus();
+            else submitPage11();
+        }
+    });
+
+    p11Inp2?.addEventListener("keypress", function(e) {
+        if (e.key === "Enter") { e.preventDefault(); submitPage11(); }
+    });
+});
