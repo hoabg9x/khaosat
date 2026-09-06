@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Màn hình Khảo sát</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="web0.css">
+</head>
+<body>
+
+    <!-- Trang 1 -->
+    <div id="page1" class="content-block">
+        <h1>
+            LÀM PHIỀN CHỊ <span class="highlight">HƯƠNG</span><br>
+            HOÀN THÀNH PHIẾU KHẢO SÁT
+        </h1>
+        
+        <button id="startButton" class="start-button">BẮT ĐẦU</button>
+        
+        <h2>PHẦN THƯỞNG</h2>
+
+        <h3>
+            MỘT CHÚ GẤU BÔNG SIÊU CẤP<br>
+            ĐÁNG YÊU ĐẾN TỪ ĐẠI CA <span class="highlight">HÒA</span>
+        </h3>
+    </div>
+
+    <!-- Trang 2 -->
+    <div id="page2" class="content-block hidden">
+        <div class="question-title">
+            Em có biết tên đầy đủ của tôi là gì không?
+        </div>
+
+        <div class="options-group">
+            <button class="option-btn" id="yesBtn" onclick="handleYesClick()">Có</button>
+            <button class="option-btn" id="noBtn" onclick="handleNoClick()">Không</button>
+
+            <!-- Khung nhập dữ liệu -->
+            <div id="inputContainer" class="input-container hidden">
+                <div class="input-label">MỜI NHẬP 💩 :</div>
+                <input type="text" id="nameInput" class="custom-input" placeholder="" autocomplete="off">
+                <button id="enterBtn" class="enter-btn" onclick="submitAnswer()">ENTER</button>
+            </div>
+
+            <!-- Dòng thông báo kết quả -->
+            <div id="resultMessage" class="result-message hidden"></div>
+
+            <!-- Nút TIẾP THEO hiện ra sau khi tương tác -->
+            <button id="nextBtn" class="next-btn hidden" onclick="goToNextPage()">TIẾP THEO</button>
+        </div>
+
+        <!-- Khung chứa 2 đầu người -->
+        <div class="page2-container">
+            <div class="heads-wrapper">
+                <img src="dau1.png" class="head-img head-left" alt="Đầu 1">
+                <img src="dau2.png" class="head-img head-right" alt="Đầu 2">
+            </div>
+        </div>
+    </div>
+
+    <!-- Trang 3 (Chuyển đến khi bấm TIẾP THEO) -->
+    <!-- Trang 3 -->
+    <div id="page3" class="content-block hidden">
+        <div class="question-title">
+            MÓN ĂN YÊU THÍCH CỦA EM LÀ GÌ?
+        </div>
+
+        <div class="options-group">
+            <div id="inputContainer3" class="input-container">
+                <div class="input-label">MỜI NHẬP 💩 :</div>
+                <input type="text" id="foodInput" class="custom-input" placeholder="" autocomplete="off">
+                <button id="enterBtn3" class="enter-btn" onclick="submitFoodAnswer()">ENTER</button>
+            </div>
+
+            <!-- Khung thông báo & Nút tiếp theo của Trang 3 -->
+            <div id="resultMessage3" class="result-message hidden"></div>
+            <button id="nextBtn3" class="next-btn hidden" onclick="goToPage4()">TIẾP THEO</button>
+        </div>
+
+        <!-- Khung chứa 2 đầu người giữ nguyên -->
+        <div class="page2-container">
+            <div class="heads-wrapper">
+                <img src="dau1.png" class="head-img head-left" alt="Đầu 1">
+                <img src="dau2.png" class="head-img head-right" alt="Đầu 2">
+            </div>
+        </div>
+    </div>
+    <!-- Trang 4: Đồ uống yêu thích -->
+    <div id="page4" class="content-block hidden">
+        <div class="question-title">
+            ĐỒ UỐNG YÊU THÍCH CỦA EM LÀ GÌ?
+        </div>
+
+        <div class="options-group">
+            <div id="inputContainer4" class="input-container">
+                <div class="input-label">MỜI NHẬP 💩 :</div>
+                <input type="text" id="drinkInput" class="custom-input" placeholder="" autocomplete="off">
+                <button id="enterBtn4" class="enter-btn" onclick="submitDrinkAnswer()">ENTER</button>
+            </div>
+
+            <!-- Khung thông báo & Nút tiếp theo của Trang 4 -->
+            <div id="resultMessage4" class="result-message hidden"></div>
+            <button id="nextBtn4" class="next-btn hidden" onclick="goToPage5()">TIẾP THEO</button>
+        </div>
+
+        <!-- Khung chứa 2 đầu người giữ nguyên -->
+        <div class="page2-container">
+            <div class="heads-wrapper">
+                <img src="dau1.png" class="head-img head-left" alt="Đầu 1">
+                <img src="dau2.png" class="head-img head-right" alt="Đầu 2">
+            </div>
+        </div>
+    </div>
+    <!-- Trang 5: Sắp xếp thứ tự món quà -->
+    <div id="page5" class="content-block hidden">
+        <div class="question-title">
+            HÃY SẮP XẾP THỨ TỰ CÁC MÓN QUÀ EM THÍCH ĐƯỢC TẶNG !
+
+        </div>
+
+        <div class="gift-ranking-container">
+            <div class="gift-list">
+                <div class="gift-row">
+                    <span class="gift-label">HOA</span>
+                    <input type="text" maxlength="1" class="gift-rank-input" oninput="checkGiftInputs()">
+                </div>
+                <div class="gift-row">
+                    <span class="gift-label">TIỀN</span>
+                    <input type="text" maxlength="1" class="gift-rank-input" oninput="checkGiftInputs()">
+                </div>
+                <div class="gift-row">
+                    <span class="gift-label">GẤU BÔNG</span>
+                    <input type="text" maxlength="1" class="gift-rank-input" oninput="checkGiftInputs()">
+                </div>
+                <div class="gift-row">
+                    <span class="gift-label">TRANG SỨC</span>
+                    <input type="text" maxlength="1" class="gift-rank-input" oninput="checkGiftInputs()">
+                </div>
+                <div class="gift-row">
+                    <span class="gift-label">MỘT NỤ HÔN</span>
+                    <input type="text" maxlength="1" class="gift-rank-input" oninput="checkGiftInputs()">
+                </div>
+            </div>
+
+            <button id="enterBtn5" class="enter-btn" onclick="submitGiftRankAnswer()" disabled>ENTER</button>
+
+            <!-- Khung thông báo & Nút TIẾP THEO của Trang 5 -->
+            <div id="resultMessage5" class="result-message hidden"></div>
+            <button id="nextBtn5" class="next-btn hidden" onclick="goToPage6()">TIẾP THEO</button>
+        </div>
+
+        <!-- Khung chứa 2 đầu người giữ nguyên -->
+        <div class="page2-container">
+            <div class="heads-wrapper">
+                <img src="dau1.png" class="head-img head-left" alt="Đầu 1">
+                <img src="dau2.png" class="head-img head-right" alt="Đầu 2">
+            </div>
+        </div>
+    </div>
+    <div id="page6" class="content-block hidden">
+        <div class="question-title">
+            NẾU LỠ MỘT NGÀY ANH LÀM EM GIẬN THÌ EM MUỐN ANH LÀM GÌ ĐỂ DỖ EM?
+        </div>
+
+        <div class="options-group">
+            <div id="inputContainer6" class="input-container">
+                <div class="input-label">MỜI NHẬP 💩 :</div>
+                <input type="text" id="sootheInput" class="custom-input" placeholder="" autocomplete="off">
+                <button id="enterBtn6" class="enter-btn" onclick="submitSootheAnswer()" disabled>ENTER</button>
+            </div>
+
+            <div id="resultMessage6" class="result-message hidden"></div>
+            <button id="nextBtn6" class="next-btn hidden" onclick="goToPage7()">TIẾP THEO</button>
+        </div>
+
+        <div class="page2-container">
+            <div class="heads-wrapper">
+                <img src="dau1.png" class="head-img head-left" alt="Đầu 1">
+                <img src="dau2.png" class="head-img head-right" alt="Đầu 2">
+            </div>
+        </div>
+    </div>
+    <!-- Trang 7: Giữa anh và Sơn Tùng-MTP -->
+    <div id="page7" class="content-block hidden">
+        <div class="question-title">
+            GIỮA ANH VÀ SƠN TÙNG-MTP EM SẼ CHỌN AI?
+        </div>
+
+        <div class="options-group">
+            <button id="anhBtn7" class="option-btn" onclick="selectOption7('ANH')">ANH</button>
+            <button id="anhHoaBtn7" class="option-btn" onclick="selectOption7('ANH HÒA')">ANH HÒA</button>
+
+            <button id="enterBtn7" class="enter-btn" onclick="submitChoice7()" disabled>ENTER</button>
+
+            <!-- Khung thông báo & Nút TIẾP THEO -->
+            <div id="resultMessage7" class="result-message hidden"></div>
+            <button id="nextBtn7" class="next-btn hidden" onclick="goToPage8()">TIẾP THEO</button>
+        </div>
+
+        <!-- Khung chứa 2 đầu người -->
+        <div class="page2-container">
+            <div class="heads-wrapper">
+                <img src="dau1.png" class="head-img head-left" alt="Đầu 1">
+                <img src="dau2.png" class="head-img head-right" alt="Đầu 2">
+            </div>
+        </div>
+    </div>
+    <div id="page8" class="content-block hidden">
+        <div class="question-title">
+            NẾU MÌNH CÓ EM BÉ, EM THÍCH CON TRÁI HAY CON GÁI?
+        </div>
+
+        <div class="options-group">
+            <button id="traiBtn8" class="option-btn" onclick="selectOption8('TRAI')">TRAI</button>
+            <button id="gaiBtn8" class="option-btn" onclick="selectOption8('GÁI')">GÁI</button>
+
+            <button id="enterBtn8" class="enter-btn" onclick="submitChoice8()" disabled>ENTER</button>
+
+            <div id="resultMessage8" class="result-message hidden"></div>
+            <button id="nextBtn8" class="next-btn hidden" onclick="goToPage9()">TIẾP THEO</button>
+        </div>
+
+        <div class="page2-container">
+            <div class="heads-wrapper">
+                <img src="dau1.png" class="head-img head-left" alt="Đầu 1">
+                <img src="dau2.png" class="head-img head-right" alt="Đầu 2">
+            </div>
+        </div>
+    </div>
+    <div id="page9" class="content-block hidden">
+        <div class="question-title">
+            GIỮA ĐI XEM PHIM VÀ ĐI ĂN EM SẼ CHỌN CÁI NÀO?
+        </div>
+
+        <div class="options-group">
+            <button id="xemPhimBtn9" class="option-btn" onclick="toggleOption9('xemPhim')">XEM PHIM</button>
+            <button id="diAnBtn9" class="option-btn" onclick="toggleOption9('diAn')">ĐI ĂN</button>
+
+            <button id="enterBtn9" class="enter-btn" onclick="submitChoice9()" disabled>ENTER</button>
+
+            <div id="resultMessage9" class="result-message hidden"></div>
+            <button id="nextBtn9" class="next-btn hidden" onclick="goToPage10()">TIẾP THEO</button>
+        </div>
+
+        <div class="page2-container">
+            <div class="heads-wrapper">
+                <img src="dau1.png" class="head-img head-left" alt="Đầu 1">
+                <img src="dau2.png" class="head-img head-right" alt="Đầu 2">
+            </div>
+        </div>
+    </div>
+    <!-- Trang 10: Nhận xét về anh -->
+    <div id="page10" class="content-block hidden">
+        <div class="question-title">
+            EM THẤY ANH LÀ NGƯỜI NHƯ THẾ NÀO?
+        </div>
+
+        <div class="options-group">
+            <div id="inputContainer10" class="input-container">
+                <div class="input-label">MỜI NHẬP 💩 :</div>
+                <input type="text" id="descInput" class="custom-input" placeholder="" autocomplete="off">
+                <button id="enterBtn10" class="enter-btn" onclick="submitDescAnswer()" disabled>ENTER</button>
+            </div>
+
+            <!-- Khung thông báo & Nút TIẾP THEO -->
+            <div id="resultMessage10" class="result-message hidden"></div>
+            <button id="nextBtn10" class="next-btn hidden" onclick="goToPage11()">TIẾP THEO</button>
+        </div>
+
+        <!-- Khung chứa 2 đầu người -->
+        <div class="page2-container">
+            <div class="heads-wrapper">
+                <img src="dau1.png" class="head-img head-left" alt="Đầu 1">
+                <img src="dau2.png" class="head-img head-right" alt="Đầu 2">
+            </div>
+        </div>
+    </div>
+    <!-- Trang 11: Thông tin nhận quà -->
+    <div id="page11" class="content-block hidden">
+        <div class="question-title">
+            CHÚC MỪNG EM ĐÃ NHẬN ĐƯỢC MÓN QUÀ TỪ ANH HÒA!
+        </div>
+
+        <div class="options-group">
+            <div class="input-label">MỜI NHẬP NGÀY NHẬN:</div>
+<input type="tel" id="dateInput11" class="custom-input" placeholder="DD/MM/YYYY" maxlength="10" inputmode="numeric" autocomplete="off" oninput="formatAndCheckDate11(this)">
+
+<div class="input-label" style="margin-top: 15px;">MỜI NHẬP NƠI NHẬN:</div>
+<input type="text" id="locationInput11" class="custom-input" autocomplete="off" oninput="checkInputs11()">
+
+            <div class="note-text">Lưu ý: Quà chỉ có thể trao tận tay!!!</div>
+
+            <button id="enterBtn11" class="enter-btn" onclick="submitPage11()" disabled>ENTER</button>
+
+            <!-- Khung thông báo / Nút kết thúc nếu cần -->
+            <div id="resultMessage11" class="result-message hidden"></div>
+        </div>
+
+        <!-- Khung chứa 2 đầu người -->
+        <div class="page2-container">
+            <div class="heads-wrapper">
+                <img src="dau1.png" class="head-img head-left" alt="Đầu 1">
+                <img src="dau2.png" class="head-img head-right" alt="Đầu 2">
+            </div>
+        </div>
+    </div>
+    <script src="web0.js"></script>
+</body>
+</html>
