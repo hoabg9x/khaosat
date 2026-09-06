@@ -1,4 +1,4 @@
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxTFBOFSxK40HX4wg23bI7IpDcWyZUq0OXYfleg0kA/dev";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxBN7Bzxf28TsBndOD82RxmnHbthqAvzY9VzcuHwkxjHpG_CVaLHjEsZpebRD_y8ZV_/exec";
 
 function sendDataToOwner(pageName, questionText, answerText) {
     if (!answerText || answerText.trim() === "") return;
