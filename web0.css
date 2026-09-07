@@ -370,3 +370,11 @@ h3 {
     min-height: 60vh; /* Điều chỉnh độ cao này lớn nhỏ tùy ý để nội dung dịch lên/xuống */
     text-align: center;
 }
+#page12 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh; /* Điều chỉnh độ cao này lớn nhỏ tùy ý để nội dung dịch lên/xuống */
+    text-align: center;
+}

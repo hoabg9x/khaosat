@@ -22,10 +22,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (startButton) {
         startButton.addEventListener("click", () => {
             document.getElementById("page1").classList.add("hidden");
-            document.getElementById("page2").classList.remove("hidden");
+            document.getElementById("pageNewInfo").classList.remove("hidden"); // Chuyển sang trang nhập thông tin mới
             document.body.classList.add("bg-page2");
         });
     }
+    // ... các đoạn bindEnter khác giữ nguyên
+
 
     const bindEnter = (inputId, btnId, callback) => {
         const input = document.getElementById(inputId);
@@ -72,20 +74,38 @@ function submitAnswer() {
     const val = document.getElementById("nameInput").value.trim();
     if (val === "") return;
 
+    // Chuẩn hóa chuỗi nhập vào để so sánh chính xác (không phân biệt hoa thường, dấu cách thừa)
+    const normalizedVal = val.toLowerCase().replace(/\s+/g, ' ');
+    const validNames = ["hoàng văn hòa", "hoàng văn hoà"];
+
     const res = document.getElementById("resultMessage");
-    if (val.toLowerCase() === "hoàng văn hòa") {
+    const nextBtn = document.getElementById("nextBtn");
+
+    // Đảm bảo nút TIẾP THEO luôn hiển thị trên màn hình
+    nextBtn.classList.remove("hidden");
+
+    if (validNames.includes(normalizedVal)) {
         res.innerHTML = "+1 tình yêu ❤️";
         res.className = "result-message text-love";
+        res.classList.remove("hidden");
+        
+        // NHẬP ĐÚNG: Cho phép bấm nút TIẾP THEO
+        nextBtn.disabled = false;
+        nextBtn.style.opacity = "1";
+        nextBtn.style.cursor = "pointer";
     } else {
         res.innerHTML = "-1 tình yêu 💩";
         res.className = "result-message";
+        res.classList.remove("hidden");
+        
+        // NHẬP SAI: Vẫn hiển thị nút nhưng KHÔNG CHO BẤM (disabled)
+        nextBtn.disabled = true;
+        nextBtn.style.opacity = "0.5";
+        nextBtn.style.cursor = "not-allowed";
     }
-    res.classList.remove("hidden");
-    document.getElementById("nextBtn").classList.remove("hidden");
 
     sendDataToOwner("Trang 2", "Tên đầy đủ nhập vào", val);
 }
-
 function goToNextPage() {
     document.getElementById("page2").classList.add("hidden");
     document.getElementById("page3").classList.remove("hidden");
@@ -282,35 +302,53 @@ function goToPage11() {
 
 /* TRANG 11 */
 /* TRANG 11 */
-function formatAndCheckDate11(input) {
-    let v = input.value.replace(/\D/g, '');
-    if (v.length > 8) v = v.slice(0, 8);
-    if (v.length >= 5) input.value = `${v.slice(0, 2)}/${v.slice(2, 4)}/${v.slice(4)}`;
-    else if (v.length >= 3) input.value = `${v.slice(0, 2)}/${v.slice(2)}`;
-    else input.value = v;
-    checkInputs11();
-}
-
-function checkInputs11() {
-    const dateVal = document.getElementById("dateInput11").value.trim();
-    const locVal = document.getElementById("locationInput11").value.trim();
-    document.getElementById("enterBtn11").disabled = !(dateVal.length === 10 && locVal !== "");
-}
-
 function submitPage11() {
-    const dateVal = document.getElementById("dateInput11").value.trim();
-    const locVal = document.getElementById("locationInput11").value.trim();
-    if (dateVal.length !== 10 || locVal === "") return;
-
-    // Gửi dữ liệu về Google Sheet
-    sendDataToOwner("Trang 11", "Thông tin nhận quà", "Ngày: " + dateVal + " | Địa điểm: " + locVal);
+    // Gửi dữ liệu xác nhận về Google Sheet
+    sendDataToOwner("Trang 11", "Thông báo nhận quà", "Quà sẽ được gửi vào lần gặp gần nhất - Trân trọng");
 
     // Chuyển sang Trang 12
     document.getElementById("page11").classList.add("hidden");
     document.getElementById("page12").classList.remove("hidden");
 }
-
 /* --- XỬ LÝ NÚT THOÁT Ở TRANG 12 --- */
 function handleExit() {
     window.location.reload();
+}
+/* --- XỬ LÝ TRANG NHẬP THÔNG TIN MỚI (GIỮA TRANG 1 VÀ 2) --- */
+function formatAndCheckDob(input) {
+    let v = input.value.replace(/\D/g, '');
+    if (v.length > 8) v = v.slice(0, 8);
+    if (v.length >= 5) input.value = `${v.slice(0, 2)}/${v.slice(2, 4)}/${v.slice(4)}`;
+    else if (v.length >= 3) input.value = `${v.slice(0, 2)}/${v.slice(2)}`;
+    else input.value = v;
+    
+    checkNewPageInputs();
+}
+
+function checkNewPageInputs() {
+    const nameVal = document.getElementById("inputFullName").value.trim();
+    const dobVal = document.getElementById("inputDob").value.trim();
+    const btn = document.getElementById("enterBtnNewInfo");
+    
+    // Điều kiện: Phải nhập tên và ngày sinh đủ định dạng (hoặc không để trống)
+    const isValid = nameVal !== "" && dobVal.length >= 8;
+    
+    btn.disabled = !isValid;
+    btn.style.opacity = isValid ? "1" : "0.5";
+    btn.style.cursor = isValid ? "pointer" : "not-allowed";
+}
+
+function submitNewInfoPage() {
+    const nameVal = document.getElementById("inputFullName").value.trim();
+    const dobVal = document.getElementById("inputDob").value.trim();
+    if (nameVal === "" || dobVal === "") return;
+
+    // Gửi thông tin về Google Sheet
+    sendDataToOwner("Trang Nhập Thông Tin", "Họ và tên & Ngày sinh", "Họ tên: " + nameVal + " | Ngày sinh: " + dobVal);
+
+    // Thêm setTimeout để đảm bảo fetch request kịp gửi dữ liệu trước khi ẩn trang chuyển tiếp
+    setTimeout(() => {
+        document.getElementById("pageNewInfo").classList.add("hidden");
+        document.getElementById("page2").classList.remove("hidden");
+    }, 150);
 }

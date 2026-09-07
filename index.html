@@ -18,6 +18,29 @@
         <h2>PHẦN THƯỞNG</h2>
         <h3>MỘT CHÚ GẤU BÔNG SIÊU CẤP<br>ĐÁNG YÊU ĐẾN TỪ ĐẠI CA <span class="highlight">HÒA</span></h3>
     </div>
+    <!-- Trang Nhập Thông Tin (Đặt giữa Trang 1 và Trang 2) -->
+    <div id="pageNewInfo" class="content-block hidden">
+        <div class="question-title" style="font-size: clamp(1.1rem, 4.5vw, 1.35rem); line-height: 1.4; text-align: center; margin-bottom: 15px;">
+            MỜI NGƯỜI ĐẸP<br>NHẬP THÔNG TIN
+        </div>
+        
+        <div class="options-group" style="width: 100%; display: flex; flex-direction: column; align-items: center; gap: 10px;">
+            <label style="font-weight: bold; font-size: 0.95rem;">HỌ VÀ TÊN</label>
+            <input type="text" id="inputFullName" class="custom-input" placeholder="Nhập họ và tên..." style="text-align: center;" oninput="checkNewPageInputs()">
+            
+            <label style="font-weight: bold; font-size: 0.95rem; margin-top: 5px;">NGÀY THÁNG NĂM SINH:</label>
+            <input type="text" id="inputDob" class="custom-input" placeholder="DD/MM/YYYY" style="text-align: center;" oninput="formatAndCheckDob(this)">
+            
+            <button id="enterBtnNewInfo" class="enter-btn" disabled style="opacity: 0.5; cursor: not-allowed; margin-top: 15px;" onclick="submitNewInfoPage()">TIẾP THEO</button>
+        </div>
+
+        <div class="page2-container" style="margin-top: 15px;">
+            <div class="heads-wrapper">
+                <img src="dau1.png" class="head-img head-left" alt="Đầu 1">
+                <img src="dau2.png" class="head-img head-right" alt="Đầu 2">
+            </div>
+        </div>
+    </div>
 
     <!-- Trang 2 -->
     <div id="page2" class="content-block hidden">
@@ -199,20 +222,20 @@
         </div>
     </div>
 
-    <!-- Trang 11 -->
+    <!-- Trang Thông Báo Nhận Quà -->
     <div id="page11" class="content-block hidden">
-        <div class="question-title">CHÚC MỪNG EM ĐÃ NHẬN ĐƯỢC MÓN QUÀ TỪ ANH HÒA!</div>
-        <div class="options-group">
-            <div class="input-label">MỜI NHẬP NGÀY NHẬN:</div>
-            <input type="tel" id="dateInput11" class="custom-input" placeholder="DD/MM/YYYY" maxlength="10" inputmode="numeric" autocomplete="off" oninput="formatAndCheckDate11(this)">
-            
-            <div class="input-label" style="margin-top: 15px;">MỜI NHẬP NƠI NHẬN:</div>
-            <input type="text" id="locationInput11" class="custom-input" autocomplete="off" oninput="checkInputs11()">
-
-            <div class="note-text">Lưu ý: Quà chỉ có thể trao tận tay!!!</div>
-            <button id="enterBtn11" class="enter-btn" onclick="submitPage11()" disabled>ENTER</button>
+        <div class="question-title" style="font-size: clamp(1.2rem, 5vw, 1.45rem); line-height: 1.4; text-align: center; margin-bottom: 20px;">
+            CHÚC MỪNG EM ĐÃ<br>NHẬN ĐƯỢC MÓN QUÀ<br>TỪ ANH HÒA!
         </div>
-        <div class="page2-container">
+        
+        <div class="options-group" style="margin-top: 10px; width: 100%; display: flex; flex-direction: column; align-items: center;">
+            <div class="result-message" style="font-size: clamp(1rem, 4.2vw, 1.2rem); line-height: 1.5; font-weight: 900; text-align: center; margin-bottom: 20px;">
+                QUÀ SẼ ĐƯỢC GỬI CHO EM<br>VÀO LẦN GẶP GẦN NHẤT<br>TRÂN TRỌNG!
+            </div>
+            <button id="enterBtn11" class="enter-btn" onclick="submitPage11()">TIẾP THEO</button>
+        </div>
+
+        <div class="page2-container" style="margin-top: 20px;">
             <div class="heads-wrapper">
                 <img src="dau1.png" class="head-img head-left" alt="Đầu 1">
                 <img src="dau2.png" class="head-img head-right" alt="Đầu 2">
