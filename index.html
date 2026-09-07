@@ -203,16 +203,36 @@
     </div>
 
     <!-- Trang 10 -->
-    <div id="page10" class="content-block hidden">
-        <div class="question-title">EM THẤY ANH LÀ NGƯỜI NHƯ THẾ NÀO?</div>
+<div id="page10" class="content-block hidden">
+    <div class="question-title">EM THẤY ANH LÀ NGƯỜI NHƯ THẾ NÀO?</div>
+    <div class="options-group">
+        <div id="inputContainer10" class="input-container">
+            <div class="input-label">MỜI NHẬP 💩 :</div>
+            <input type="text" id="descInput" class="custom-input" autocomplete="off">
+            <button id="enterBtn10" class="enter-btn" onclick="submitDescAnswer()" disabled>ENTER</button>
+        </div>
+        <div id="resultMessage10" class="result-message hidden"></div>
+        <!-- Sửa dòng này thành goToPage10_5() -->
+        <button id="nextBtn10" class="next-btn hidden" onclick="goToPage10_5()">TIẾP THEO</button>
+    </div>
+    <div class="page2-container">
+        <div class="heads-wrapper">
+            <img src="dau1.png" class="head-img head-left" alt="Đầu 1">
+            <img src="dau2.png" class="head-img head-right" alt="Đầu 2">
+        </div>
+    </div>
+</div>
+    <!-- Trang mới (Sau trang 10, trước trang 11) -->
+    <div id="page10_5" class="content-block hidden">
+        <div class="question-title">NẾU MỘT NGÀY CHÚNG TA CÃI NHAU, ANH IM LẶNG THÌ EM SẼ LÀM GÌ?</div>
         <div class="options-group">
-            <div id="inputContainer10" class="input-container">
+            <div id="inputContainer10_5" class="input-container">
                 <div class="input-label">MỜI NHẬP 💩 :</div>
-                <input type="text" id="descInput" class="custom-input" autocomplete="off">
-                <button id="enterBtn10" class="enter-btn" onclick="submitDescAnswer()" disabled>ENTER</button>
+                <input type="text" id="input10_5" class="custom-input" autocomplete="off">
+                <button id="enterBtn10_5" class="enter-btn" onclick="submitAnswer10_5()" disabled>ENTER</button>
             </div>
-            <div id="resultMessage10" class="result-message hidden"></div>
-            <button id="nextBtn10" class="next-btn hidden" onclick="goToPage11()">TIẾP THEO</button>
+            <div id="resultMessage10_5" class="result-message hidden"></div>
+            <button id="nextBtn10_5" class="next-btn hidden" onclick="goToPage11()">TIẾP THEO</button>
         </div>
         <div class="page2-container">
             <div class="heads-wrapper">

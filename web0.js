@@ -293,6 +293,9 @@ function submitDescAnswer() {
     document.getElementById("nextBtn10").classList.remove("hidden");
 
     sendDataToOwner("Trang 10", "Cảm nhận về anh", val);
+}function goToPage10_5() {
+    document.getElementById('page10').classList.add('hidden');
+    document.getElementById('page10_5').classList.remove('hidden');
 }
 
 function goToPage11() {
@@ -351,4 +354,52 @@ function submitNewInfoPage() {
         document.getElementById("pageNewInfo").classList.add("hidden");
         document.getElementById("page2").classList.remove("hidden");
     }, 150);
+}
+// --- XỬ LÝ CHO TRANG CÃI NHAU (page10_5) ---
+// --- XỬ LÝ CHO TRANG CÃI NHAU (page10_5) ---
+const input10_5 = document.getElementById('input10_5');
+const enterBtn10_5 = document.getElementById('enterBtn10_5');
+const resultMessage10_5 = document.getElementById('resultMessage10_5');
+const nextBtn10_5 = document.getElementById('nextBtn10_5');
+
+// Bật/tắt nút ENTER khi người dùng gõ chữ
+if (input10_5) {
+    input10_5.addEventListener('input', function() {
+        if (this.value.trim() !== '') {
+            enterBtn10_5.disabled = false;
+            enterBtn10_5.style.opacity = '1';
+            enterBtn10_5.style.cursor = 'pointer';
+        } else {
+            enterBtn10_5.disabled = true;
+            enterBtn10_5.style.opacity = '0.5';
+            enterBtn10_5.style.cursor = 'not-allowed';
+        }
+    });
+}
+
+function submitAnswer10_5() {
+    const val = input10_5.value.trim();
+    if (val === "") return;
+
+    input10_5.disabled = true;
+    enterBtn10_5.classList.add('hidden');
+    
+    // Hiển thị chữ LOADING............ thay vì dòng chữ mặc định
+    resultMessage10_5.classList.remove('hidden');
+    resultMessage10_5.innerHTML = "LOADING............";
+    
+    // Sau 1 giây thì ẩn chữ LOADING đi và hiện nút TIẾP THEO
+    setTimeout(() => {
+        resultMessage10_5.classList.add('hidden');
+        nextBtn10_5.classList.remove('hidden');
+    }, 1000);
+
+    // Gửi dữ liệu về Google Sheet
+    sendDataToOwner("Trang Cãi Nhau", "Anh im lặng thì em sẽ làm gì?", val);
+}
+
+// Hàm chuyển từ trang 10_5 sang trang 11
+function goToPage11() {
+    document.getElementById('page10_5').classList.add('hidden');
+    document.getElementById('page11').classList.remove('hidden');
 }
